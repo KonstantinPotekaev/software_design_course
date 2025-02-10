@@ -1,6 +1,6 @@
 using System;
-using MINI_HW_1.AnimalCreators;
 using MINI_HW_1.Domain.Animals;
+using MINI_HW_1.Utils;
 
 namespace MINI_HW_1.AnimalCreators
 {
@@ -8,27 +8,30 @@ namespace MINI_HW_1.AnimalCreators
     {
         public string AnimalTypeName => "Кролик (травоядный)";
 
-        public Animal CreateAnimal()
+        public Animal? CreateAnimal()
         {
-            Console.Write("Введите имя кролика: ");
-            string name = Console.ReadLine();
-            int food = ReadInt("Введите количество кг еды в день: ");
-            int kindness = ReadInt("Введите уровень доброты (от 1 до 10): ");
-            return new Rabbit(name, food, kindness);
-        }
-
-        private int ReadInt(string prompt)
-        {
-            int value;
-            while (true)
+            var name = InputHelper.ReadNonEmptyString("Введите имя кролика (или 'q' для отмены): ");
+            if (name == null)
             {
-                Console.Write(prompt);
-                if (int.TryParse(Console.ReadLine(), out value))
-                    break;
-                else
-                    Console.WriteLine("Неверное число. Попробуйте снова.");
+                Console.WriteLine("Операция создания кролика отменена.");
+                return null;
             }
-            return value;
+            
+            var food = InputHelper.ReadInt("Введите количество кг еды в день (или 'q' для отмены): ");
+            if (food == null)
+            {
+                Console.WriteLine("Операция создания кролика отменена.");
+                return null;
+            }
+            
+            var kindness = InputHelper.ReadInt("Введите уровень доброты (от 1 до 10) (или 'q' для отмены): ");
+            if (kindness == null)
+            {
+                Console.WriteLine("Операция создания кролика отменена.");
+                return null;
+            }
+            
+            return new Rabbit(name, food.Value, kindness.Value);
         }
     }
 }

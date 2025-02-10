@@ -5,6 +5,6 @@ namespace MINI_HW_1.ThingCreators
     public interface IThingCreator
     {
         string ThingTypeName { get; }
-        Thing CreateThing();
+        Thing? CreateThing();
     }
 }

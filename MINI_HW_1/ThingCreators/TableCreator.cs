@@ -1,6 +1,6 @@
 using System;
 using MINI_HW_1.Domain.Things;
-using MINI_HW_1.ThingCreators;
+using MINI_HW_1.Utils;
 
 namespace MINI_HW_1.ThingCreators
 {
@@ -8,11 +8,12 @@ namespace MINI_HW_1.ThingCreators
     {
         public string ThingTypeName => "Стол";
 
-        public Thing CreateThing()
+        public Thing? CreateThing()
         {
-            Console.Write("Введите наименование стола: ");
-            string name = Console.ReadLine();
-            return new Table(name);
+            var name = InputHelper.ReadNonEmptyString("Введите наименование стола (или 'q' для отмены): ");
+            if (name != null) return new Table(name);
+            Console.WriteLine("Операция отменена.");
+            return null;
         }
     }
 }

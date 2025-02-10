@@ -5,6 +5,6 @@ namespace MINI_HW_1.AnimalCreators
     public interface IAnimalCreator
     {
         string AnimalTypeName { get; }
-        Animal CreateAnimal();
+        Animal? CreateAnimal();
     }
 }

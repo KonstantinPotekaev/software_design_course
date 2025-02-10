@@ -1,11 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using MINI_HW_1.Domain;
 using MINI_HW_1.Domain.Animals;
 using MINI_HW_1.Domain.Things;
 using MINI_HW_1.AnimalCreators;
 using MINI_HW_1.ThingCreators;
+using MINI_HW_1.Utils;
 
 namespace MINI_HW_1.UI
 {
@@ -15,7 +13,8 @@ namespace MINI_HW_1.UI
         private readonly IEnumerable<IAnimalCreator> _animalCreators;
         private readonly IEnumerable<IThingCreator> _thingCreators;
 
-        public MenuManager(Zoo zoo, IEnumerable<IAnimalCreator> animalCreators, IEnumerable<IThingCreator> thingCreators)
+        public MenuManager(Zoo zoo, IEnumerable<IAnimalCreator> animalCreators,
+            IEnumerable<IThingCreator> thingCreators)
         {
             _zoo = zoo;
             _animalCreators = animalCreators;
@@ -72,6 +71,7 @@ namespace MINI_HW_1.UI
                         break;
                 }
             }
+
             Console.WriteLine("Приложение завершено.");
         }
 
@@ -84,14 +84,28 @@ namespace MINI_HW_1.UI
                 Console.WriteLine($"{index}. {creator.AnimalTypeName}");
                 index++;
             }
-            int choice = ReadInt("Ваш выбор: ");
-            if (choice < 1 || choice > _animalCreators.Count())
+
+            int? choice = InputHelper.ReadInt("Ваш выбор: ");
+            while (!choice.HasValue || choice < 1 || choice > _animalCreators.Count())
             {
-                Console.WriteLine("Неверный выбор");
+                if (!choice.HasValue)
+                {
+                    Console.WriteLine("Операция отменена.");
+                    return;
+                }
+                Console.WriteLine("Неверный выбор. Попробуйте снова или введите 'q' для отмены.");
+                choice = InputHelper.ReadInt("Ваш выбор: ");
+            }
+            
+
+            var selectedCreator = _animalCreators.ElementAt((int)choice - 1);
+            Animal? newAnimal = selectedCreator.CreateAnimal();
+            if (newAnimal == null)
+            {
+                Console.WriteLine("Создание животного отменено.");
                 return;
             }
-            var selectedCreator = _animalCreators.ElementAt(choice - 1);
-            Animal newAnimal = selectedCreator.CreateAnimal();
+
             bool success = _zoo.AddAnimal(newAnimal);
             Console.WriteLine(success
                 ? $"Животное {newAnimal.Name} успешно добавлено."
@@ -107,14 +121,27 @@ namespace MINI_HW_1.UI
                 Console.WriteLine($"{index}. {creator.ThingTypeName}");
                 index++;
             }
-            int choice = ReadInt("Ваш выбор: ");
-            if (choice < 1 || choice > _thingCreators.Count())
+
+            int? choice = InputHelper.ReadInt("Ваш выбор: ");
+            while (!choice.HasValue || choice < 1 || choice > _thingCreators.Count())
             {
-                Console.WriteLine("Неверный выбор");
+                if (!choice.HasValue)
+                {
+                    Console.WriteLine("Операция отменена.");
+                    return;
+                }
+                Console.WriteLine("Неверный выбор. Попробуйте снова или введите 'q' для отмены.");
+                choice = InputHelper.ReadInt("Ваш выбор: ");
+            }
+
+            var selectedCreator = _thingCreators.ElementAt((int)choice - 1);
+            Thing? newThing = selectedCreator.CreateThing();
+            if (newThing == null)
+            {
+                Console.WriteLine("Создание вещи отменено.");
                 return;
             }
-            var selectedCreator = _thingCreators.ElementAt(choice - 1);
-            var newThing = selectedCreator.CreateThing();
+
             _zoo.AddThing(newThing);
             Console.WriteLine($"Вещь {newThing.Name} успешно добавлена.");
         }
@@ -191,20 +218,6 @@ namespace MINI_HW_1.UI
                     Console.WriteLine(thing.GetInfo());
                 }
             }
-        }
-
-        private int ReadInt(string prompt)
-        {
-            int value;
-            while (true)
-            {
-                Console.Write(prompt);
-                if (int.TryParse(Console.ReadLine(), out value))
-                    break;
-                else
-                    Console.WriteLine("Неверное число. Попробуйте снова.");
-            }
-            return value;
         }
     }
 }

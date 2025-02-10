@@ -1,6 +1,5 @@
-using System;
-using MINI_HW_1.AnimalCreators;
 using MINI_HW_1.Domain.Animals;
+using MINI_HW_1.Utils;
 
 namespace MINI_HW_1.AnimalCreators
 {
@@ -8,26 +7,23 @@ namespace MINI_HW_1.AnimalCreators
     {
         public string AnimalTypeName => "Волк (хищник)";
 
-        public Animal CreateAnimal()
+        public Animal? CreateAnimal()
         {
-            Console.Write("Введите имя волка: ");
-            string name = Console.ReadLine();
-            int food = ReadInt("Введите количество кг еды в день: ");
-            return new Wolf(name, food);
-        }
-
-        private int ReadInt(string prompt)
-        {
-            int value;
-            while (true)
+            var name = InputHelper.ReadNonEmptyString("Введите имя волка (или 'q' для отмены): ");
+            if (name == null)
             {
-                Console.Write(prompt);
-                if (int.TryParse(Console.ReadLine(), out value))
-                    break;
-                else
-                    Console.WriteLine("Неверное число. Попробуйте снова.");
+                Console.WriteLine("Операция создания волка отменена.");
+                return null;
             }
-            return value;
+
+            var food = InputHelper.ReadInt("Введите количество кг еды в день (или 'q' для отмены): ");
+            if (food == null)
+            {
+                Console.WriteLine("Операция создания волка отменена.");
+                return null;
+            }
+
+            return new Wolf(name, food.Value);
         }
     }
 }

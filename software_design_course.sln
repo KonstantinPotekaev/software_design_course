@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SM_1", "SM_1\SM_1.csproj", "{7C9BEA9E-17F0-48A0-947E-95CC241DB0A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MINI_HW_1", "MINI_HW_1\MINI_HW_1.csproj", "{383242F3-9165-4BB5-9C6D-2DAFCA208B29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{7C9BEA9E-17F0-48A0-947E-95CC241DB0A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C9BEA9E-17F0-48A0-947E-95CC241DB0A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C9BEA9E-17F0-48A0-947E-95CC241DB0A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{383242F3-9165-4BB5-9C6D-2DAFCA208B29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{383242F3-9165-4BB5-9C6D-2DAFCA208B29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{383242F3-9165-4BB5-9C6D-2DAFCA208B29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{383242F3-9165-4BB5-9C6D-2DAFCA208B29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

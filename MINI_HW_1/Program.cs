@@ -22,6 +22,7 @@ namespace MINI_HW_1
 
         private static void ConfigureServices(IServiceCollection services)
         {
+            // Регистрация интерфейсов и их реализация
             services.AddSingleton<IVeterinaryClinic, VeterinaryClinic>();
             services.AddSingleton<Zoo>();
             services.AddSingleton<MenuManager>();

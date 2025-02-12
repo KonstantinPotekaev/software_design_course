@@ -25,25 +25,35 @@ namespace MINI_HW_1.Utils
             }
         }
 
-        public static int? ReadInt(string prompt, string cancelKeyword = "q")
+        public static int? ReadInt(string prompt, int? rangeStart = null, int? rangeEnd = null,
+            string cancelKeyword = "q")
         {
             while (true)
             {
                 Console.Write(prompt);
-                var input = Console.ReadLine();
+                string? input = Console.ReadLine();
+
                 if (string.Equals(input, cancelKeyword, StringComparison.OrdinalIgnoreCase))
                 {
                     return null;
                 }
 
-                if (int.TryParse(input, out int value))
+                if (!int.TryParse(input, out int value))
                 {
-                    return value;
+                    Console.WriteLine($"Ошибка: Введите корректное целое число или '{cancelKeyword}' для отмены.");
+                    continue;
                 }
 
-                Console.WriteLine($"Неверное число. Попробуйте снова или введите '{cancelKeyword}' для отмены.");
+                if ((rangeStart.HasValue && value < rangeStart.Value) || (rangeEnd.HasValue && value > rangeEnd.Value))
+                {
+                    Console.WriteLine($"Ошибка: Число должно быть в диапазоне [{rangeStart ?? int.MinValue}, {rangeEnd ?? int.MaxValue}]. Попробуйте снова.");
+                    continue;
+                }
+
+                return value;
             }
         }
+
 
         public static string ReadNonEmptyStringStrict(string prompt)
         {

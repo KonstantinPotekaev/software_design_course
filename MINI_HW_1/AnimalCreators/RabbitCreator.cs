@@ -19,14 +19,14 @@ namespace MINI_HW_1.AnimalCreators
                     return null;
                 }
 
-                var food = InputHelper.ReadInt("Введите количество кг еды в день (или 'q' для отмены): ");
+                var food = InputHelper.ReadInt(prompt: "Введите количество кг еды в день (или 'q' для отмены): ", rangeStart: 0);
                 if (food == null)
                 {
                     Console.WriteLine("Операция создания кролика отменена.");
                     return null;
                 }
 
-                var kindness = InputHelper.ReadInt("Введите уровень доброты (от 1 до 10) (или 'q' для отмены): ");
+                var kindness = InputHelper.ReadInt("Введите уровень доброты (от 1 до 10) (или 'q' для отмены): ", rangeStart: 1, rangeEnd: 10);
                 if (kindness == null)
                 {
                     Console.WriteLine("Операция создания кролика отменена.");

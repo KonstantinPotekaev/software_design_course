@@ -16,7 +16,7 @@ namespace MINI_HW_1.AnimalCreators
                 return null;
             }
 
-            var food = InputHelper.ReadInt("Введите количество кг еды в день (или 'q' для отмены): ");
+            var food = InputHelper.ReadInt(prompt: "Введите количество кг еды в день (или 'q' для отмены): ", rangeStart: 0);
             if (food == null)
             {
                 System.Console.WriteLine("Операция создания тигра отменена.");

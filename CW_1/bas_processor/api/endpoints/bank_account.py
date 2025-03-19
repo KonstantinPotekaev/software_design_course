@@ -1,16 +1,17 @@
+import uuid
+
 from fastapi import APIRouter, Depends
 from typing import List
-from app.schemas.bank_account import BankAccountCreate, BankAccountRead, BankAccountUpdate
-from app.services.bank_account_service import BankAccountService
+
+from bas_processor.schemas.bank_account import BankAccountCreate, BankAccountRead, BankAccountUpdate
+from bas_processor.services.bank_account_service import BankAccountService
 
 router = APIRouter()
 
 
 @router.post("/", response_model=BankAccountRead)
-async def create_bank_account(
-        data: BankAccountCreate,
-        service: BankAccountService = Depends()
-):
+async def create_bank_account(data: BankAccountCreate,
+                              service: BankAccountService = Depends()):
     return await service.create_bank_account(data)
 
 
@@ -20,20 +21,18 @@ async def get_all_accounts(service: BankAccountService = Depends()):
 
 
 @router.get("/{account_id}", response_model=BankAccountRead)
-async def get_account_by_id(account_id: int, service: BankAccountService = Depends()):
+async def get_account_by_id(account_id: uuid.UUID, service: BankAccountService = Depends()):
     return await service.get_bank_account_by_id(account_id)
 
 
 @router.put("/{account_id}", response_model=BankAccountRead)
-async def update_account(
-        account_id: int,
-        data: BankAccountUpdate,
-        service: BankAccountService = Depends()
-):
+async def update_account(account_id: uuid.UUID,
+                         data: BankAccountUpdate,
+                         service: BankAccountService = Depends()):
     return await service.update_bank_account(account_id, data)
 
 
 @router.delete("/{account_id}")
-async def delete_account(account_id: int, service: BankAccountService = Depends()):
+async def delete_account(account_id: uuid.UUID, service: BankAccountService = Depends()):
     await service.delete_bank_account(account_id)
     return {"message": "Bank account deleted"}

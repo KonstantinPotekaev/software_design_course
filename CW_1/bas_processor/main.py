@@ -1,3 +1,5 @@
+import multiprocessing
+import os
 from contextlib import asynccontextmanager
 
 import uvicorn
@@ -6,6 +8,8 @@ from fastapi import FastAPI
 import bas_processor.common.globals as bas_globals
 
 from bas_processor.api.router import router
+from bas_processor.db.models import Base
+from bas_processor.db.session import engine
 
 from utils.bas_utils.async_service_app import run_async_service
 from utils.ut_logging import LOGGING_SECTION
@@ -15,6 +19,8 @@ SERVICE_NAME = "bas_processor"
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
     yield
     raise SystemExit()
 
@@ -42,6 +48,8 @@ async def on_stop_callback():
 
 
 if __name__ == "__main__":
+    os.environ["no_proxy"] = "*"
+    multiprocessing.set_start_method('fork', True)
     run_async_service(service_name=SERVICE_NAME,
                       main_coro=main,
                       on_stop=on_stop_callback())

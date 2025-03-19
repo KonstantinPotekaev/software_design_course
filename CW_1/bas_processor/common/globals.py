@@ -1,6 +1,6 @@
 import logging
 import logging.config
-from typing import Optional, List
+from typing import Optional
 
 from bas_processor.common.struct.process_logger import ProcessLogger, QueueHandler
 from utils import ut_logging
@@ -24,10 +24,7 @@ def init_service_logger(service_name, conf_dict):
         # отключаем логирование в библиотеках в режиме INFO
         loggers_section = conf_dict[ut_logging.LOGGING_SECTION][ut_logging.LOGGERS_SECTION]
 
-        loggers_section['speechbrain.pretrained.fetching'][ut_logging.LEVEL_SUBSECTION] = "ERROR"
-        loggers_section['faster_whisper'][ut_logging.LEVEL_SUBSECTION] = "ERROR"
         loggers_section['uvicorn.access'][ut_logging.LEVEL_SUBSECTION] = "ERROR"
-        loggers_section['gensim.utils'][ut_logging.LEVEL_SUBSECTION] = "ERROR"
 
         logging.config.dictConfig(conf_dict[ut_logging.LOGGING_SECTION])
 

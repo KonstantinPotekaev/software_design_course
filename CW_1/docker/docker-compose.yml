@@ -1,0 +1,48 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+
+#  bas:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile.fastapi
+#    container_name: bank_account_service
+#    environment:
+#      DATABASE_URL: "postgresql+asyncpg://admin:admin@postgres:5432/hse_db"
+#    ports:
+#      - "8000:8000"
+#    depends_on:
+#      - postgres
+
+#  streamlit:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile.streamlit
+#    container_name: streamlit_service
+#    ports:
+#      - "8501:8501"
+#    depends_on:
+#      - bas
+
+volumes:
+  postgres_data:

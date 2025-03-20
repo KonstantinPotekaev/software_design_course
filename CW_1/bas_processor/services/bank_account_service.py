@@ -43,5 +43,6 @@ class BankAccountService:
 
     async def delete_bank_account(self, account_id: uuid.UUID):
         account = await self.get_bank_account_by_id(account_id)
-        async with self.session.begin():
-            await self.session.delete(account)
+        await self.session.delete(account)
+        await self.session.commit()
+

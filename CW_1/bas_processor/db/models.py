@@ -40,7 +40,6 @@ class OperationModel(Base):
     __tablename__ = OPERATIONS_TABLE
 
     id = Column(UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4)
-    type = Column(String, nullable=False)
     bank_account_id = Column(UUID(as_uuid=True), ForeignKey(FK_BANK_ACCOUNT), nullable=False)
     amount = Column(Float, nullable=False)
     date = Column(DateTime(timezone=True), server_default=func.now())

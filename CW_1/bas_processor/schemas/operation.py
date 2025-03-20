@@ -4,11 +4,8 @@ from pydantic import BaseModel, confloat
 from typing import Optional
 from datetime import datetime
 
-from bas_processor.common.struct.transaction import TransactionType
-
 
 class OperationBase(BaseModel):
-    type: TransactionType
     amount: confloat(ge=0)
     description: Optional[str] = None
     bank_account_id: uuid.UUID
@@ -20,7 +17,6 @@ class OperationCreate(OperationBase):
 
 
 class OperationUpdate(BaseModel):
-    type: Optional[str]
     amount: Optional[confloat(ge=0)]
     description: Optional[str]
     bank_account_id: uuid.UUID

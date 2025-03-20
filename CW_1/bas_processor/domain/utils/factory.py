@@ -1,7 +1,8 @@
-from bas_processor.common.struct.transaction import TransactionType
 from bas_processor.domain.bank_account import BankAccount
 from bas_processor.domain.category import Category
 from bas_processor.domain.operation import Operation
+
+from utils.bas_utils.transaction import TransactionType
 
 
 class DomainFactory:

@@ -1,7 +1,7 @@
 from pydantic import BaseModel, confloat
 from typing import Optional
 
-from bas_processor.common.struct.transaction import TransactionType
+from utils.bas_utils.transaction import TransactionType
 
 
 class Operation(BaseModel):

@@ -43,8 +43,8 @@ async def main(config: dict):
 
 async def on_stop_callback():
     pass
-    # das_globals.resource_manager.stop()
-    # await das_globals.stop_subscribers()
+    # bas_globals.resource_manager.stop()
+    # await bas_globals.stop_subscribers()
 
 
 if __name__ == "__main__":

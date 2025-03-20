@@ -2,11 +2,14 @@ import logging
 import logging.config
 from typing import Optional
 
+from bas_processor.common.struct.events_bus import EventBus
 from bas_processor.common.struct.process_logger import ProcessLogger, QueueHandler
 from utils import ut_logging
 
 service_logger: Optional[logging.Logger] = None
 service_config = {}
+
+event_bus = EventBus()
 
 
 def init_service_config(config: dict):

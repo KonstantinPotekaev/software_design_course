@@ -3,7 +3,7 @@ import uuid
 from pydantic import BaseModel
 from typing import Optional
 
-from bas_processor.common.struct.transaction import TransactionType
+from utils.bas_utils.transaction import TransactionType
 
 
 class CategoryBase(BaseModel):
@@ -22,6 +22,7 @@ class CategoryUpdate(BaseModel):
 
 class CategoryRead(CategoryBase):
     id: uuid.UUID
+
 
     class Config:
         from_attributes = True

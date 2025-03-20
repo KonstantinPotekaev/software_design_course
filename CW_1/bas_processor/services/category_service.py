@@ -15,8 +15,8 @@ class CategoryService:
 
     async def create_category(self, data: CategoryCreate):
         new_category = CategoryModel(**data.model_dump())
-        async with self.session.begin():
-            self.session.add(new_category)
+        self.session.add(new_category)
+        await self.session.commit()
         return new_category
 
     async def get_all_categories(self):
@@ -37,11 +37,11 @@ class CategoryService:
         update_data = data.dict(exclude_unset=True)
         for field, value in update_data.items():
             setattr(category, field, value)
-        async with self.session.begin():
-            self.session.add(category)
+        self.session.add(category)
+        await self.session.commit()
         return category
 
     async def delete_category(self, category_id: uuid.UUID):
         category = await self.get_category_by_id(category_id)
-        async with self.session.begin():
-            await self.session.delete(category)
+        await self.session.delete(category)
+        await self.session.commit()

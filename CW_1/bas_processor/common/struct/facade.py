@@ -1,6 +1,7 @@
-from bas_processor.common.struct.transaction import TransactionType
 from bas_processor.schemas.category import CategoryCreate
 from bas_processor.services.category_service import CategoryService
+
+from utils.bas_utils.transaction import TransactionType
 
 
 class CategoryFacade:

@@ -130,7 +130,6 @@ operations:
             Assert.Equal("Yaml Account", accounts[0].Name);
             Assert.Single(cats);
             Assert.Single(ops);
-            // Операция должна быть создана с типом, полученным из категории (income)
             Assert.Equal("income", ops[0].Type);
 
             File.Delete(tempYamlFile);

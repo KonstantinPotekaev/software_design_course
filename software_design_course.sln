@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MINI_HW_1", "MINI_HW_1\MINI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTests_MINI_HW_1", "UTests_MINI_HW_1\UTests_MINI_HW_1.csproj", "{A7F4176D-7969-4D3C-9289-9068EB52EF70}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CW_1_CSharp", "CW_1_CSharp\CW_1_CSharp.csproj", "{329AD748-C132-4A98-B66C-F0767B96D865}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{A7F4176D-7969-4D3C-9289-9068EB52EF70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7F4176D-7969-4D3C-9289-9068EB52EF70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7F4176D-7969-4D3C-9289-9068EB52EF70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{329AD748-C132-4A98-B66C-F0767B96D865}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{329AD748-C132-4A98-B66C-F0767B96D865}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{329AD748-C132-4A98-B66C-F0767B96D865}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{329AD748-C132-4A98-B66C-F0767B96D865}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

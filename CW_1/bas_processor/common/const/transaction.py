@@ -1,2 +1,0 @@
-INCOME = "income"
-EXPENSE = "expense"
